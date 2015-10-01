@@ -591,6 +591,9 @@ namespace LinqToTwitterPcl.Tests.StatusTests
             Assert.IsFalse(status.Users.Any());
             Assert.IsNotNull(status.WithheldInCountries);
             Assert.IsFalse(status.WithheldInCountries.Any());
+            Assert.IsTrue(status.IsQuoteStatus);
+            Assert.AreEqual(12378946113145666ul, status.QuotedStatusId);
+            Assert.IsNotNull(status.QuotedStatus);
         }
 
         [TestMethod]
@@ -862,6 +865,10 @@ namespace LinqToTwitterPcl.Tests.StatusTests
          ""profile_sidebar_fill_color"":""95E8EC"",
          ""follow_request_sent"":false
       },
+      ""quoted_status_id"" : 12378946113145666,
+      ""quoted_status"":{
+      },
+      ""is_quote_status"" : true,
       ""retweet_count"":393,
       ""id_str"":""184835136037191681"",
       ""in_reply_to_user_id"":null,

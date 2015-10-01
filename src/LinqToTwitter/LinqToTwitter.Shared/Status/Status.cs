@@ -100,6 +100,10 @@ namespace LinqToTwitter
             }
             User = new User(status.GetValue<JsonData>("user"));
             Users = new List<ulong>();
+
+            IsQuoteStatus = status.GetValue<bool>("is_quote_status");
+            QuotedStatusId = status.GetValue<ulong>("quoted_status_id");
+            QuotedStatus = new Status(status.GetValue<JsonData>("quoted_status"));
         }
 
         /// <summary>
@@ -342,7 +346,7 @@ namespace LinqToTwitter
         public bool PossiblySensitive { get; set; }
 
         /// <summary>
-        /// Retweeted status is status is a retweet
+        /// Retweeted status if status is a retweet
         /// </summary>
         public Status RetweetedStatus { get; set; }
 
@@ -411,6 +415,21 @@ namespace LinqToTwitter
         /// Manage paging through a list (e.g. IDs from Users collection)
         /// </summary>
         public Cursors CursorMovement { get; set; }
+
+        /// <summary>
+        /// Indicate that a Tweet is quoting another Tweet
+        /// </summary>
+        public bool IsQuoteStatus { get; set; }
+
+        /// <summary>
+        /// Quoted TweetID
+        /// </summary>
+        public ulong QuotedStatusId { get; set; }
+        
+        /// <summary>
+        /// Qouted status if status is a quoted tweet
+        /// </summary>
+        public Status QuotedStatus { get; set; }
 
         /// <summary>
         /// This helps process media uploads via StatusRequestProcessor.ProcessActionResult
