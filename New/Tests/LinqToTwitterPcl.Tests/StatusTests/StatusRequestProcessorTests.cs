@@ -591,6 +591,9 @@ namespace LinqToTwitterPcl.Tests.StatusTests
             Assert.IsFalse(status.Users.Any());
             Assert.IsNotNull(status.WithheldInCountries);
             Assert.IsFalse(status.WithheldInCountries.Any());
+            Assert.IsTrue(status.IsQuoteStatus);
+            Assert.AreEqual(12378946113145666ul, status.QuotedStatusId);
+            Assert.IsNotNull(status.QuotedStatus);
         }
 
         [TestMethod]
@@ -813,6 +816,10 @@ namespace LinqToTwitterPcl.Tests.StatusTests
          ""geo"":null,
          ""text"":""I just blogged about http:\/\/t.co\/YWHGwOq6 MVC, Web API, Razor and Open Source - Now with Contributions: http:\/\/t.co\/qpevLMZd""
       },
+      ""quoted_status_id"" : 12378946113145666,
+      ""quoted_status"":{
+      },
+      ""is_quote_status"" : true,
       ""contributors"":null,
       ""coordinates"":{
           ""type"":""Point"",

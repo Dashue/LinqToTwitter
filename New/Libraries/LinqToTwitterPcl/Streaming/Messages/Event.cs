@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using LinqToTwitter.Common;
 using LitJson;
+using Newtonsoft.Json;
 
 namespace LinqToTwitter
 {
@@ -13,8 +13,15 @@ namespace LinqToTwitter
             Target = new User(evt.GetValue<JsonData>("target"));
             Source = new User(evt.GetValue<JsonData>("source"));
             EventName = evt.GetValue<string>("event");
-            var targetObj = evt.GetValue<JsonData>("target_object", defaultValue: null);
-            TargetObject = targetObj == null ? (string)null : targetObj.ToString();
+            var targetObj = evt.GetValue<JsonData>("target_object", null);
+            TargetObject = targetObj == null ? null : targetObj.ToString();
+            if (EventName == "quoted_tweet")
+            {
+                TargetObject = JsonConvert.SerializeObject(new Status(targetObj), new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            }
             CreatedAt = evt.GetValue<string>("created_at").GetDate(DateTime.MaxValue);
         }
 
